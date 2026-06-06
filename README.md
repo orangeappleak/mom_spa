@@ -1,36 +1,184 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# mom_spa
+
+A Next.js web application. This document covers how to get set up locally and how we collaborate on this repo as a team.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repo
+
+```bash
+git clone git@github.com:orangeappleak/mom_spa.git
+cd mom_spa
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Branch Structure
 
-## Learn More
+```
+main          ← production-ready, never commit here directly
+development   ← integration branch, merge all features here first
+feat/xxx      ← feature branches (branch off development)
+fix/xxx       ← bug fix branches (branch off development)
+```
 
-To learn more about Next.js, take a look at the following resources:
+**Rules:**
+- `main` is protected — only merge from `development` when the build is stable and tested
+- All day-to-day work goes through `development`
+- Never push directly to `main` or `development` — always use a pull request
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Starting New Work
 
-## Deploy on Vercel
+Always branch off `development`, never `main`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+# 1. Sync with latest development
+git checkout development
+git pull origin development
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 2. Create your branch
+git checkout -b feat/your-feature-name
+```
+
+**Branch naming:**
+| Type | Format | Example |
+|---|---|---|
+| New feature | `feat/` | `feat/homepage` |
+| Bug fix | `fix/` | `fix/navbar-overflow` |
+| Styles only | `style/` | `style/hero-spacing` |
+| Refactor | `refactor/` | `refactor/api-calls` |
+
+---
+
+## Working on the Same Branch as Someone Else
+
+If two people are on the same branch (e.g. `feat/homepage`):
+
+**Before you push — always pull first:**
+```bash
+git pull origin feat/homepage --rebase
+git push origin feat/homepage
+```
+
+**If you get a conflict:**
+```bash
+# Git will pause and show conflict markers in the file
+# Open the file, resolve manually, then:
+git add <the-file>
+git rebase --continue
+git push origin feat/homepage
+```
+
+**Tip:** Divide the files between you upfront to avoid conflicts entirely. E.g. one person owns `Hero.tsx`, the other owns `Navbar.tsx`.
+
+---
+
+## Daily Workflow
+
+```bash
+# Start of day — sync your branch with latest development
+git fetch origin
+git rebase origin/development
+
+# Work, then commit in small chunks
+git add src/components/Hero.tsx
+git commit -m "feat: add hero section layout"
+
+# End of day / ready to share — push
+git pull origin feat/homepage --rebase
+git push origin feat/homepage
+```
+
+---
+
+## Commit Message Format
+
+Keep messages short and consistent:
+
+```
+feat: add hero banner
+fix: correct mobile nav overflow
+style: update button colours
+refactor: extract api helper
+chore: update dependencies
+```
+
+---
+
+## Opening a Pull Request
+
+1. Push your branch to origin
+2. Go to [github.com/orangeappleak/mom_spa](https://github.com/orangeappleak/mom_spa)
+3. Open a PR from your branch → **`development`** (not `main`)
+4. Add a short description of what changed
+5. Request a review from the other person
+6. Only merge after approval
+
+**PRs to `main` are only opened from `development`** once features are complete and tested.
+
+---
+
+## Merging to Main
+
+```
+feat/xxx  →  (PR)  →  development  →  (PR)  →  main
+```
+
+When `development` is stable:
+1. Open a PR from `development` → `main`
+2. Both team members review
+3. Merge and verify the production build
+
+---
+
+## Useful Commands
+
+```bash
+# See what's changed on your branch vs development
+git diff origin/development...HEAD
+
+# See recent commits on the branch
+git log --oneline -10
+
+# Stash unfinished work before switching branches
+git stash
+git stash pop
+
+# Undo last commit but keep your changes
+git reset --soft HEAD~1
+
+# See who changed what in a file
+git blame src/app/page.tsx
+```
+
+---
+
+## Quick-Reference Cheatsheet
+
+| Task | Command |
+|---|---|
+| Sync with development | `git pull origin development --rebase` |
+| New branch | `git checkout -b feat/name` |
+| Stage specific file | `git add path/to/file` |
+| Commit | `git commit -m "feat: description"` |
+| Pull before push (same branch) | `git pull origin feat/name --rebase` |
+| Push branch | `git push origin feat/name` |
+| Stash work | `git stash` / `git stash pop` |
