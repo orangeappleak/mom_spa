@@ -4,7 +4,7 @@ import SectionCard from "@/components/cards/SectionCard"
 function SectionTwo() {
   return (
     <>
-      <div className=" min-h-[100vh] m-2 rounded-2xl flex flex-col gap-2 ">
+      <div className="relative min-h-[100vh] z-40 rounded-2xl flex flex-col gap-2 bg-black ">
         <div className=" min-h-[40vh] flex flex-col justify-center gap-5 items-center">
           <div className="w-120 flex flex-col justify-center items-center ">
             <h1 className="text-8xl font-gomies">Small habits</h1>

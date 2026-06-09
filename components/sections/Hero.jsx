@@ -4,7 +4,7 @@ import React from "react";
 function Hero() {
   return (
     <>
-      <section id="home-page-wrapper" className="h-screen w-screen relative">
+      <section id="home-page-wrapper" data-speed="0.1" className="h-screen w-screen relative">
         {/* <div
           id="home-page-bg-wrapper"
           className="w-full h-full absolute top-0 flex justify-center items-center"
@@ -26,14 +26,21 @@ function Hero() {
 
         <div
           id="home-page-content-wrapper"
-          className="relative h-full z-10 w-full flex justify-center items-center"
+          className="relative h-full z-10 w-full flex justify-center items-center bg-white"
         >
           <div id="home-page-content-hero" className="w-full h-full flex flex-col items-center justify-between">
-            <div id="home-page-heading" className="text-center flex-1 flex flex-col items-center justify-center">
+            <div id="home-page-heading" className="text-center flex-1 flex flex-col items-center justify-center text-black">
               <h1 className="text-6xl font-google-sans font-light">
                 Your personalized
               </h1>
               <h1 className="text-6xl font-google-sans font-light">Habit tracker</h1>
+            </div>
+
+            <div id="momentum-icon-wrapper" className="w-full h-full absolute top-0 z-20 flex items-center justify-center">
+              <div id="momentum-icon" data-speed="0.01" className="w-1/5 h-1/2 rounded-2xl bg-black/10 backdrop-blur-xs flex items-center justify-center">
+              <Image src={'/Images/mom-icon.jpeg'} width={1000} height={1000} objectFit="fill" className="w-1/2 h-auto rounded-2xl" alt="icon" />
+              </div>
+
             </div>
 
             <div

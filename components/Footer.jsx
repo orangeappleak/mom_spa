@@ -10,7 +10,7 @@ import {
 function Footer() {
   return (
     <>
-      <div className="bg-zinc-100 rounded-t-2xl flex justify-center items-center min-h-[50vh] px-6">
+      <div className="bg-black rounded-t-2xl flex justify-center items-center min-h-[50vh] px-6 z-40">
         <div className="flex flex-col md:flex-row justify-between md:items-start gap-12 w-full max-w-7xl py-16">
           {/* Logos */}
           <div className="flex flex-col justify-between min-h-[180px]">
