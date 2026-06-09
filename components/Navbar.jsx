@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -8,7 +7,7 @@ function Navbar() {
   const [isOpen, setisOpen] = useState(false);
   return (
     <>
-      <div className="  flex justify-center items-center ">
+      <div className="  flex justify-center items-center z-10 ">
         {/* desktop */}
         <div className=" fixed top-0 m-5 bg-amber-100/10 backdrop-blur-sm  rounded-full  py-2 px-4 sm:w-120 w-full  flex justify-between sm:justify-around items-center gap-5 shadow-sm">
           <div>
