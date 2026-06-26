@@ -27,10 +27,8 @@ export default function RootLayout({
       className={`${google_sans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
         <SmoothScroller>
           {children}
-          <Footer />
         </SmoothScroller>
       </body>
     </html>

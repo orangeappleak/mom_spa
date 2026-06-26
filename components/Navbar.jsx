@@ -1,90 +1,57 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 function Navbar() {
-  const [isOpen, setisOpen] = useState(false);
   return (
     <>
-      <div className="  flex justify-center items-center z-10 ">
-        {/* desktop */}
-        <div className=" fixed top-0 m-5 bg-amber-100/10 backdrop-blur-sm  rounded-full  py-2 px-4 sm:w-120 w-full  flex justify-between sm:justify-around items-center gap-5 shadow-sm">
-          <div>
-            <Link
-              className="text-[20px]  hover:font-bold transition-all  duration-75 ease-in "
-              href={"/"}
-            >
-              Momento
-            </Link>
-          </div>
-
-          <div className="flex items-center justify-center text-center sm:hidden ">
-            <h1
-              className="text-xl cursor-pointer"
-              onClick={() => {
-                setisOpen(!isOpen);
-              }}
-            >
-              ☰
-            </h1>
-          </div>
-
-          <Link
-            className="hidden sm:flex text-[15px]  hover:font-bold transition-all  duration-75 ease-in "
-            href={"/"}
-          >
-            About
-          </Link>
-          <Link
-            className="hidden sm:flex text-[15px]   hover:font-bold transition-all  duration-75 ease-in "
-            href={"/"}
-          >
-            How it works
-          </Link>
-          <Link
-            className="hidden sm:flex text-[15px] bg-black px-4 py-2 text-center text-white rounded-full  hover:font-bold transition-all  duration-75 ease-in "
-            href={"/"}
-          >
-            Get the app
-          </Link>
+      <div className="absolute top-0 w-screen flex justify-between items-center h-[10vh] sm:h-[12vh] py-4 sm:py-5 px-5 sm:px-20 z-30">
+        <div id="icon-wrapper" className="h-full flex items-center justify-start">
+          <Image
+            width={1000}
+            height={1000}
+            src={'/Images/app_icon.png'}
+            className="w-auto h-full rounded-2xl contrast-125 brightness-75"
+            alt="icon"
+          />
         </div>
-        
-        {/* mobile */}
-        <div>
-          <div
-            className={`sm:hidden bg-gray-300/20 backdrop-blur-sm flex flex-col items-center text-center  absolute left-0 right-0 m-8
-      transition-all duration-100 rounded-b-2xl rounded-t-2xl ease-in-out transform
-      ${
-        isOpen
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 -translate-y-4 pointer-events-none"
-      }`}
+
+        <motion.div
+          id="get-button"
+          initial="rest"
+          whileHover="hover"
+          whileTap={{ scale: 0.97 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="px-5 sm:px-10 py-3 sm:py-5 rounded-full cursor-pointer overflow-hidden relative backdrop-blur-md border whitespace-nowrap"
+          style={{ borderWidth: 1 }}
+          variants={{
+            rest: {
+              backgroundColor: "rgba(255, 255, 255, 0.08)",
+              borderColor: "rgba(255, 255, 255, 0.25)",
+              boxShadow: "0 0px 0px rgba(255, 255, 255, 0)",
+            },
+            hover: {
+              scale: 1.04,
+              backgroundColor: "#ffffff",
+              borderColor: "rgba(255, 255, 255, 0)",
+              boxShadow: "0 8px 30px rgba(255, 255, 255, 0.25)",
+            },
+          }}
+        >
+          <motion.h1
+            className="text-sm sm:text-xl font-medium font-google-sans relative z-10"
+            variants={{
+              rest: { color: "#ffffff" },
+              hover: { color: "#000000" },
+            }}
+            transition={{ duration: 0.3 }}
           >
-            <div className="flex flex-col m-5 gap-4">
-              <Link
-                className="text-[15px] hover:font-bold transition-all duration-75 ease-in-out"
-                href={"/"}
-              >
-                About
-              </Link>
-
-              <Link
-                className="text-[15px] hover:font-bold transition-all duration-75 ease-in"
-                href={"/"}
-              >
-                How it works
-              </Link>
-
-              <Link
-                className="text-[15px] bg-black px-4 py-2 text-center text-white rounded-full hover:font-bold transition-all duration-75 ease-in"
-                href={"/"}
-              >
-                Get the app
-              </Link>
-            </div>
-          </div>
-        </div>
+            Get Momentum
+          </motion.h1>
+        </motion.div>
       </div>
     </>
   );

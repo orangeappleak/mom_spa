@@ -19,7 +19,22 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       effects: true,
     });
 
-    return () => smoother.kill();
+    // Hard lock: prevent any scroll input from registering at all
+    smoother.paused(true);
+    document.body.style.overflow = 'hidden';
+
+    const handleUnlock = () => {
+      smoother.paused(false);
+      document.body.style.overflow = '';
+    };
+
+    window.addEventListener('intro-complete', handleUnlock);
+
+    return () => {
+      window.removeEventListener('intro-complete', handleUnlock);
+      document.body.style.overflow = '';
+      smoother.kill();
+    };
   }, []);
 
   return (
