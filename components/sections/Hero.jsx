@@ -13,44 +13,33 @@ function Hero() {
     const section = sectionRef.current;
     if (!section) return;
 
-    // Query within this component's section only, so we don't
-    // accidentally grab elements from other Hero-like sections.
     const handImages = section.querySelectorAll(".hero-hand-image");
     const headings = section.querySelectorAll(".hero-heading");
     const svgs = section.querySelectorAll(".hero-svg-wordmark");
     const gradient = section.querySelector(".hero-gradient");
 
+    // Failsafe: if the animation hasn't completed within 5 seconds,
+    // force everything visible and unlock scroll anyway.
+    const failsafeTimeout = setTimeout(() => {
+      console.warn("Hero animation failsafe triggered");
+      window.dispatchEvent(new Event('intro-complete'));
+    }, 5000);
+
     const tl = gsap.timeline({
       defaults: { ease: "power3.out" },
       onComplete: () => {
+        clearTimeout(failsafeTimeout);
         window.dispatchEvent(new Event('intro-complete'));
       },
     });
 
-    tl.to(handImages, {
-      y: 0,
-      duration: 1.4,
-    })
-      .to(
-        gradient,
-        {
-          opacity: 1,
-          duration: 1.2,
-        },
-        "-=0.4"
-      )
-      .to(headings, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-      })
-      .to(svgs, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-      });
+    tl.to(handImages, { y: 0, duration: 1.4 })
+      .to(gradient, { opacity: 1, duration: 1.2 }, "-=0.4")
+      .to(headings, { opacity: 1, y: 0, duration: 0.8 })
+      .to(svgs, { opacity: 1, y: 0, duration: 0.8 });
 
     return () => {
+      clearTimeout(failsafeTimeout);
       tl.kill();
     };
   }, []);
@@ -97,6 +86,7 @@ function Hero() {
             <div className="hero-hand-image w-full flex-1 flex items-end justify-center translate-y-full relative">
               <Image
                 src={'/Images/hero_image.png'}
+                priority
                 fill
                 className="object-cover object-bottom rounded-2xl contrast-125 brightness-100"
                 alt="icon"
@@ -119,10 +109,11 @@ function Hero() {
             </div>
 
             <div className="w-full h-full absolute top-0 z-20 flex items-end justify-center overflow-hidden" data-speed="0.5">
-              <div className="hero-hand-image w-3/4 md:w-2/3 h-3/5 md:h-2/3 relative translate-y-full">
+              <div className="hero-hand-image w-full h-3/5 md:h-2/3 relative translate-y-full">
                 <div className="absolute bottom-0 left-0 w-full h-full flex items-end justify-center">
                   <Image
                     src={'/Images/hero_image.png'}
+                    priority
                     width={2000}
                     height={2000}
                     className="w-auto h-full rounded-2xl contrast-125 brightness-100"

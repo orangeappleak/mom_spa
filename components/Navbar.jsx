@@ -8,15 +8,17 @@ import { motion } from "framer-motion";
 function Navbar() {
   return (
     <>
-      <div className="absolute top-0 w-screen flex justify-between items-center h-[10vh] sm:h-[12vh] py-4 sm:py-5 px-5 sm:px-20 z-30">
+      <div className="fixed top-0 w-screen flex justify-between items-center h-[10vh] sm:h-[12vh] py-4 sm:py-5 px-5 sm:px-20 z-30">
         <div id="icon-wrapper" className="h-full flex items-center justify-start">
-          <Image
-            width={1000}
-            height={1000}
-            src={'/Images/app_icon.png'}
-            className="w-auto h-full rounded-2xl contrast-125 brightness-75"
-            alt="icon"
-          />
+          <Link href="/" className="h-full flex items-center justify-start">
+            <Image
+              width={1000}
+              height={1000}
+              src={'/Images/app_icon.png'}
+              className="w-auto h-full rounded-2xl contrast-125 brightness-75"
+              alt="icon"
+            />
+          </Link>
         </div>
 
         <motion.div
@@ -25,7 +27,7 @@ function Navbar() {
           whileHover="hover"
           whileTap={{ scale: 0.97 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="px-5 sm:px-10 py-3 sm:py-5 rounded-full cursor-pointer overflow-hidden relative backdrop-blur-md border whitespace-nowrap"
+          className="px-5 sm:px-10 py-3 sm:py-5 rounded-full cursor-pointer overflow-hidden relative border whitespace-nowrap"
           style={{ borderWidth: 1 }}
           variants={{
             rest: {
