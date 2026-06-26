@@ -8,6 +8,10 @@
   --font-google-sans: "googlesans";
 }
 
+html, body {
+  background-color: #000000;
+}
+
 #smooth-wrapper {
   overflow: hidden;
   position: fixed;
@@ -17,7 +21,16 @@
   left: 0;
 }
 
+#smooth-wrapper.is-touch-device {
+  position: relative;
+  height: auto;
+  overflow: visible;
+}
+
 #smooth-content {
   overflow: visible;
-  width: 100%;
+}
+
+#smooth-wrapper.is-touch-device #smooth-content {
+  overflow: visible;
 }

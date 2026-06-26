@@ -121,7 +121,7 @@ function SectionThree() {
                         {isOpen && (
                             <>
                                 <motion.div
-                                    className="fixed inset-0 bg-black/70 z-[100]"
+                                    className="fixed inset-0 bg-black/70 z-100"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
@@ -130,7 +130,7 @@ function SectionThree() {
                                 />
 
                                 <motion.div
-                                    className="fixed bottom-0 left-0 w-full max-h-[88vh] sm:max-h-[85vh] bg-[#1B2128] rounded-t-[32px] sm:rounded-t-[60px] z-[101] px-5 sm:px-12 py-6 sm:py-12 overflow-y-auto"
+                                    className="fixed bottom-0 left-0 w-full max-h-[95vh] bg-[#1B2128] rounded-t-[32px] sm:rounded-t-[60px] z-101 px-5 sm:px-12 py-6 sm:py-12 overflow-y-auto"
                                     initial={{ y: "100%" }}
                                     animate={{ y: 0 }}
                                     exit={{ y: "100%" }}
