@@ -1,7 +1,10 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
+
+const MotionLink = motion(Link);
 
 const buttonVariants = {
     rest: { backgroundColor: "rgba(255,255,255,0.08)", scale: 1 },
@@ -15,7 +18,7 @@ const textVariants = {
 
 function GetMomentum() {
     return (
-        <section className="relative w-full min-h-[80vh] flex items-center pb-32 sm:pb-40 justify-center text-white font-google-sans bg-gradient-to-b from-black via-[#0d0d1a] to-[#1a1333]">
+        <section className="relative w-full min-h-[80vh] flex items-center justify-center text-white font-google-sans bg-gradient-to-b from-black via-[#0d0d1a] to-[#1a1333]">
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -32,8 +35,8 @@ function GetMomentum() {
                     are and helps you build consistency that actually lasts.
                 </p>
 
-                <motion.a
-                    href="#"
+                <MotionLink
+                    href="/early-access"
                     initial="rest"
                     whileHover="hover"
                     animate="rest"
@@ -48,7 +51,7 @@ function GetMomentum() {
                     >
                         Get Momentum
                     </motion.span>
-                </motion.a>
+                </MotionLink>
             </motion.div>
         </section>
     );
