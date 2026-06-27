@@ -12,9 +12,12 @@ const google_sans = Google_Sans({
   weight: ["400", "500", "600", "700"]
 })
 
-export const metadata: Metadata = {
-  title: "Momentum",
-  description: "Your personalized habit tracker",
+export const metadata = {
+  title: {
+    default: "Momentum",
+    template: "%s — Momentum",
+  },
+  description: "Build habits that actually last."
 };
 
 export default function RootLayout({

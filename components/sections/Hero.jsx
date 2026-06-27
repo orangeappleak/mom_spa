@@ -3,8 +3,11 @@
 import Image from "next/image";
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import ScrollSmoother from "gsap/dist/ScrollSmoother";
-import Navbar from "../Navbar";
+
+// Module-level: resets on a full page reload, but persists across
+// client-side navigation. So the intro plays on a fresh load, and is
+// skipped when you navigate back to home from another route.
+let introHasPlayed = false;
 
 function Hero() {
   const sectionRef = useRef(null);
@@ -18,18 +21,29 @@ function Hero() {
     const svgs = section.querySelectorAll(".hero-svg-wordmark");
     const gradient = section.querySelector(".hero-gradient");
 
-    // Failsafe: if the animation hasn't completed within 5 seconds,
-    // force everything visible and unlock scroll anyway.
+    // Already played this page-load (e.g. returning from /early-access):
+    // jump straight to the final state, no animation, and make sure scroll
+    // is unlocked. Nothing to lock because there's no intro to protect.
+    if (introHasPlayed) {
+      gsap.set(handImages, { y: 0 });
+      gsap.set(gradient, { opacity: 1 });
+      gsap.set([...headings, ...svgs], { opacity: 1, y: 0 });
+      window.dispatchEvent(new Event("intro-complete"));
+      return;
+    }
+
     const failsafeTimeout = setTimeout(() => {
       console.warn("Hero animation failsafe triggered");
-      window.dispatchEvent(new Event('intro-complete'));
+      introHasPlayed = true;
+      window.dispatchEvent(new Event("intro-complete"));
     }, 5000);
 
     const tl = gsap.timeline({
       defaults: { ease: "power3.out" },
       onComplete: () => {
         clearTimeout(failsafeTimeout);
-        window.dispatchEvent(new Event('intro-complete'));
+        introHasPlayed = true;
+        window.dispatchEvent(new Event("intro-complete"));
       },
     });
 
