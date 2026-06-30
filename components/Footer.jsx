@@ -19,10 +19,10 @@ function Footer() {
             <Link href="/about" className="hover:text-white transition-colors">
               About
             </Link>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="/terms" className="hover:text-white transition-colors">
               Terms
             </a>
-            <a href="#" className="hover:text-white transition-colors">
+            <a href="/privacy" className="hover:text-white transition-colors">
               Privacy
             </a>
             <span className="text-gray-500">&copy; 2026 RedMango Inc.</span>
