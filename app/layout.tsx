@@ -5,6 +5,7 @@ import { Google_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/next";
 
 const google_sans = Google_Sans({
   variable: "--font-google-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </SmoothScroller>
+        <Analytics />
       </body>
     </html>
   );
